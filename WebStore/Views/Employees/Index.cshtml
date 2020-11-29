@@ -11,9 +11,9 @@
                 <th >FirstName</th>
                 <th >Patronymic</th>
                 <th >Age</th>
-                <th >
-                    
-                </th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +30,8 @@
                             <i class="fa fa-info-circle"></i>
                         </a>
                     </td>
+                    <td><a asp-controller="Employees" asp-action="Edit"  asp-route-id="@emp.Id">Edit</a></td>
+                    <td><a asp-controller="Employees" asp-action="Delete"  asp-route-id="@emp.Id">Delete</a></td>
                 </tr>                
             }
         </tbody>
@@ -38,3 +40,4 @@
        <a href="~/">Назад</a>
  </div>
 
+ 

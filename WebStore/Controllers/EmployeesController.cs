@@ -21,5 +21,51 @@ namespace WebStore.Controllers
             return NotFound();
 
         }
+        #region Edit
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null) return NotFound();
+
+            if (id <= 0) return BadRequest();
+
+            var emp = TestData.__Employees.Where(e => e.Id == id).First();
+
+            if (emp != null)
+            {                
+                return View(emp);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult Edit(Employee emp, int id)
+        {
+            //editing implementation
+            _Employees[id] = emp;
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
+        #region Delete
+        public IActionResult Delete(int? id)
+        {
+            if (id is null) return NotFound();
+
+            if (id <= 0) return BadRequest();
+
+            var emp = TestData.__Employees.Where(e => e.Id == id).First();
+
+            if (emp != null)
+            {
+                return View(emp);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult Delete(Employee emp)
+        {
+            TestData.__Employees.Remove(emp);
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
     }
 }
