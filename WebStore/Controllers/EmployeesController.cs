@@ -38,34 +38,28 @@ namespace WebStore.Controllers
             return NotFound();
         }
         [HttpPost]
-        public IActionResult Edit(Employee emp, int id)
+        public IActionResult Edit(Employee emp)
         {
             //editing implementation
-            _Employees[id] = emp;
+
+            Employee currentEmp = TestData.__Employees.Where(e => emp.Id == e.Id).First();
+            TestData.__Employees.Remove(currentEmp);
+            TestData.__Employees.Add(emp);
+            TestData.__Employees = TestData.__Employees.OrderBy(e => e.Id).ToList();
+
             return RedirectToAction(nameof(Index));
         }
         #endregion
-        #region Delete
-        public IActionResult Delete(int? id)
+
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            if (id is null) return NotFound();
-
-            if (id <= 0) return BadRequest();
-
-            var emp = TestData.__Employees.Where(e => e.Id == id).First();
-
-            if (emp != null)
-            {
-                return View(emp);
-            }
-            return NotFound();
+            Employee toDelete = TestData.__Employees.Where(e => e.Id == id).FirstOrDefault();
+            if (Object.Equals(toDelete, null))
+                return NotFound();
+            TestData.__Employees.Remove(toDelete);
+            return RedirectToAction("Index");
         }
-        [HttpPost]
-        public IActionResult Delete(Employee emp)
-        {
-            TestData.__Employees.Remove(emp);
-            return RedirectToAction(nameof(Index));
-        }
-        #endregion
+
     }
 }

@@ -4,7 +4,7 @@
 }
 <div class="container">
     <h3>@ViewData["Title"]</h3>
- <form asp-action="Edit">
+    <form asp-action="Edit">
         @Html.HiddenFor(e => Model.Id)
 
         <p>
@@ -23,14 +23,14 @@
             <br />
             @Html.EditorFor(e => Model.Patronymic)
         </p>
-                <p>
+        <p>
             @Html.LabelFor(e => Model.Age, "Age")
             <br />
             @Html.EditorFor(e => Model.Age)
         </p>
-        <input type="submit" value="Save" class="btn btn-info"/>
-                    <a asp-action="Delete" class="btn btn-info">Remove</a>
-                    <a asp-action="Index" class="btn btn-info">Return to list</a>
- </form>
- </div>
+        <input type="submit" value="Save" class="btn btn-info" />
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info">Remove</a>
+        <a asp-action="Index" class="btn btn-info">Return to list</a>
+    </form>
+</div>
 
