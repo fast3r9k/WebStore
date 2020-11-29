@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebStore.Models.Employee>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<div class="container">
+     <table class="table">
+        <thead>
+            <tr>
+                <th >#</th>
+                <th >LastName</th>
+                <th >FirstName</th>
+                <th >Patronymic</th>
+                <th >Age</th>
+                <th ></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var emp in Model)
+            { 
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.LastName</td>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.Patronymic</td>
+                    <td>@emp.Age</td>
+                    <td>
+                        <a asp-action="More" asp-route-id="@emp.Id">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                    </td>
+                </tr>                
+            }
+        </tbody>
+    </table>
+        </hr>
+       <a href="~/">Назад</a>
+ </div>
+
