@@ -34,7 +34,7 @@ namespace WebStore.Infrastructure.Services
         public bool Delete(int id)
         {
             var item = Get(id);
-            if (item is null) return;
+            if (item is null) return false;
             return _Employees.Remove(item);
         }
         
