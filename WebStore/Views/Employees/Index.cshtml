@@ -3,6 +3,10 @@
 
 <!DOCTYPE html>
 <div class="container">
+ <div>
+        <a asp-action="Create" class="btn btn-primary">Создать</a>
+    </div>
+
      <table class="table">
         <thead>
             <tr>
@@ -30,12 +34,13 @@
                         </a>
                     </td>
                     <td><a asp-controller="Employees" asp-action="Edit"  asp-route-id="@emp.Id">Edit</a></td>
+                    <td><a asp-controller="Employees" asp-action="Delete"  asp-route-id="@emp.Id" class="btn btn-danger">Remove</a></td>
                 </tr>                
             }
         </tbody>
     </table>
         </hr>
-       <a href="~/">Назад</a>
+       <a href="~/">Back</a>
  </div>
 
  
