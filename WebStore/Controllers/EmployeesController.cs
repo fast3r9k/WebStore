@@ -61,21 +61,24 @@ namespace WebStore.Controllers
         public IActionResult Edit(EmployeesViewModel model)
         {
             if (model is null) throw new ArgumentNullException(nameof(model));
-
-            var emp = new Employee
+            if (ModelState.IsValid)
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Patronymic = model.Patronymic,
-                Age = model.Age,
-                Id = model.Id
-            };
+                var emp = new Employee
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Patronymic = model.Patronymic,
+                    Age = model.Age,
+                    Id = model.Id
+                };
 
-            if (emp.Id == 0)
-                _Employees.Add(emp);
-            else
-                _Employees.Update(emp);
-            return RedirectToAction("Index");
+                if (emp.Id == 0)
+                    _Employees.Add(emp);
+                else
+                    _Employees.Update(emp);
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
         #endregion
 
