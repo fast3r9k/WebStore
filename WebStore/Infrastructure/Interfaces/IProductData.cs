@@ -6,7 +6,7 @@ using WebStore.Domain.Entityes;
 
 namespace WebStore.Infrastructure.Interfaces
 {
-    interface IProductData
+    public interface IProductData
     {
         IEnumerable<Section> GetSections();
         IEnumerable<Brand> GetBrands();
