@@ -21,8 +21,6 @@ namespace WebStore.Controllers
             return Content("Second action");
         }
 
-
-
         public IActionResult Blogs() => View();
         public IActionResult BlogSingle() => View();
         public IActionResult Cart() => View();
@@ -31,6 +29,6 @@ namespace WebStore.Controllers
         public IActionResult Login() => View();
         public IActionResult ProductDetails() => View();
         public IActionResult Shop() => View();
-
+        public IActionResult Error404() => View();
     }
 }
