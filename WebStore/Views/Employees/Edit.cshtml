@@ -1,0 +1,36 @@
+﻿@model WebStore.Models.Employee
+@{
+    ViewData["Title"] = $"Edit employee id:" + Model.Id;
+}
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+    <form asp-action="Edit">
+        @Html.HiddenFor(e => Model.Id)
+
+        <p>
+            @Html.LabelFor(e => Model.FirstName, "First name")
+            <br />
+            @Html.EditorFor(e => Model.FirstName)
+        </p>
+        <p>
+            @Html.LabelFor(e => Model.LastName, "Last Name")
+            <br />
+            @Html.EditorFor(e => Model.LastName)
+
+        </p>
+        <p>
+            @Html.LabelFor(e => Model.Patronymic, "Patronymic")
+            <br />
+            @Html.EditorFor(e => Model.Patronymic)
+        </p>
+        <p>
+            @Html.LabelFor(e => Model.Age, "Age")
+            <br />
+            @Html.EditorFor(e => Model.Age)
+        </p>
+        <input type="submit" value="Save" class="btn btn-info" />
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info">Remove</a>
+        <a asp-action="Index" class="btn btn-info">Return to list</a>
+    </form>
+</div>
+
