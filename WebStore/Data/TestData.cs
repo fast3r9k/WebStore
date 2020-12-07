@@ -8,7 +8,7 @@ namespace WebStore.Data
 {
     public class TestData
     {
-        public static readonly List<Employee> __Employees = new()
+        public static readonly List<Employee> __Employees = new List<Employee>(3)
         {
             new Employee { Id = 1, LastName = "Антонов", FirstName = "Антон", Patronymic = "Антонович", Age = 20 },
             new Employee { Id = 2, LastName = "Андреев", FirstName = "Андрей", Patronymic = "Андреевич", Age = 40 },
