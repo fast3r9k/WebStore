@@ -17,10 +17,10 @@ namespace WebStore.Infrastructure.Services
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
                 var query = TestData.Products;
-                if (Filter?.SecondId != null)
-                    query = query.Where(product => product.SectionId == Filter.SecondId);
-                if (Filter?.BranID != null)
-                    query = query.Where(product => product.BrandId == Filter.BranID);
+                if (Filter?.SeconId != null)
+                    query = query.Where(product => product.SectionId == Filter.SeconId);
+                if (Filter?.BranId != null)
+                    query = query.Where(product => product.BrandId == Filter.BranId);
                 return query;
             }
         }
