@@ -6,13 +6,14 @@ using WebStore.Domain.Entityes.Base.Interfaces;
 
 namespace WebStore.Domain.Entityes
 {
-    [Table("Sections")]
     public class Section : NamedEntity, IOrderedEntity
     {
         public  int Order { get; set; }
         public int? ParentId { get; set; }
-        [ForeignKey("ParentId")]
+
+        [ForeignKey(nameof(ParentId))]
         public  virtual  Section ParSection { get; set; }
         public  virtual  ICollection<Product> Products { get; set; }
+
     }
 }
