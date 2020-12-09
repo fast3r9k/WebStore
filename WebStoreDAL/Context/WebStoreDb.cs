@@ -6,7 +6,7 @@ using WebStore.Domain.Entityes;
 
 namespace WebStore.DAL.Context
 {
-    class WebStoreDb : DbContext
+    public class WebStoreDb : DbContext
     {
 
         public  DbSet<Product> Products { get; set; }
