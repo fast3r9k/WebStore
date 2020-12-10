@@ -18,7 +18,7 @@ namespace WebStore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(host => host
+               .ConfigureWebHostDefaults(host => host
                 .UseStartup<Startup>()
                 );
     }
