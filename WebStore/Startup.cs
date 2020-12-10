@@ -10,6 +10,8 @@ using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
 using WebStore.DAL.Context;
 using WebStore.Data;
+using WebStore.Infrastructure.Services.InDb;
+using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
 {
@@ -22,7 +24,7 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
-            services.AddTransient<IProductData, InMemoryProductData>();
+            services.AddTransient<IProductData, DbProductData>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<WebStoreDb>(opt => opt.UseSqlServer(_Configuration.GetConnectionString("Default")));
             services.AddTransient<WebStoreDbInitializer>();
