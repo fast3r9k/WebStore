@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using WebStore.Domain.Entityes.Base.Interfaces;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.Domain.Entityes
+namespace WebStore.Domain.Entities
 {
     public class Product :INamedEntity, IOrderedEntity
     {
