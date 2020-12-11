@@ -22,7 +22,8 @@ namespace WebStore.Components
                     brand => new BrandViewModel
                     {
                         Id = brand.Id,
-                        Name = brand.Name
+                        Name = brand.Name,
+                        ProductCount = brand.Products.Count()
                     });
     }
 }
