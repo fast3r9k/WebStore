@@ -20,9 +20,9 @@ namespace WebStore.Infrastructure.Services.InDb
         {
             IQueryable<Product> query = _db.Products;
             if (Filter?.BranId != null)
-                query.Where(product => product.BrandId == Filter.BranId);
+                query = query.Where(product => product.BrandId == Filter.BranId);
             if (Filter?.SeconId != null)
-                query.Where(product => product.SectionId == Filter.SeconId);
+                query = query.Where(product => product.SectionId == Filter.SeconId);
             return query;
         }
     }

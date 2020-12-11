@@ -7,12 +7,14 @@ namespace WebStore.Domain.Entities
 {
     public class Section : NamedEntity, IOrderedEntity
     {
-        public  int Order { get; set; }
+        public int Order { get; set; }
+
         public int? ParentId { get; set; }
 
         [ForeignKey(nameof(ParentId))]
-        public  virtual  Section ParSection { get; set; }
-        public  virtual  ICollection<Product> Products { get; set; }
+        public Section Parent { get; set; }
+
+        public ICollection<Product> Products { get; set; }
 
     }
 }
