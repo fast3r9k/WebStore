@@ -24,7 +24,7 @@ namespace WebStore.Controllers
             var emp = _Employees.Get(id);
             if (emp is not null)
                 return View(emp);
-            return NotFound();
+            return RedirectToAction("Error404", "Home");
 
         }
 
@@ -44,7 +44,7 @@ namespace WebStore.Controllers
             var emp = _Employees.Get((int)id);
 
             if (emp is null)
-                return NotFound();
+                return RedirectToAction("Error404", "Home");
 
 
             return View(new EmployeesViewModel
