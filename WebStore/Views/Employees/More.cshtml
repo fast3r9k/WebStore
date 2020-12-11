@@ -22,5 +22,6 @@
     
     <hr/>
     
-    <a asp-controller="Employees" asp-action="Index" >К списку</a>
+    <a asp-controller="Employees" asp-action="Index" class="btn btn-info">Return to list</a> 
+    <a asp-controller="Employees" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Remove</a>
 </div>
