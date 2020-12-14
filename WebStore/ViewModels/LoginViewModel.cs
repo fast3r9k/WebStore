@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebStore.ViewModels
 {
-    public class RegisterUserViewModel
+    public class LoginViewModel
     {
-        [Required, MaxLength(256)]
+        [Required]
+        [MaxLength(256)]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Password")]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
-        [Display(Name = "Confirm your password ")]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Password))]
-        public string PasswordConfirm { get; set; }
+        [Display(Name = "Remember me")]
+        public  bool RememberMe { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string ReturnUrl { get; set; }
     }
 }

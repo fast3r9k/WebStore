@@ -32,6 +32,7 @@ namespace WebStore
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<WebStoreDb>()
                .AddDefaultTokenProviders();
+
             services.Configure<IdentityOptions>(
                 opt =>
                 {
