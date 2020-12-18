@@ -343,3 +343,5 @@ healthchecksdb
 **/wwwroot/js/site.min.js
 **/wwwroot/js/site.js
 **/wwwroot/css/site.css
+**/wwwroot/css/site.min.css
+**/wwwroot/css/main.css
