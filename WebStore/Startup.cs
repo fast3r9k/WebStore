@@ -13,6 +13,7 @@ using WebStore.Infrastructure.Services;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Infrastructure.Services.InCookies;
 using WebStore.Infrastructure.Services.InDb;
 using WebStore.Infrastructure.Services.InMemory;
 
@@ -28,6 +29,7 @@ namespace WebStore
         {
             services.AddDbContext<WebStoreDb>(opt => opt.UseSqlServer(_Configuration.GetConnectionString("Default")));
             services.AddTransient<WebStoreDbInitializer>();
+            services.AddScoped<ICartService, InCookiesCartService>();
 
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<WebStoreDb>()

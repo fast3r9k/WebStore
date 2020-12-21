@@ -9,9 +9,9 @@
                 <p>
                     <a asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
                 </p>
-                <a href="#" class="btn btn-default add-to-cart">
-                    <i class="fa fa-shopping-cart">
-                    </i>Add to cart
+                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" 
+                   class="btn btn-default add-to-cart">
+                        <i class="fa fa-shopping-cart"></i>Add to cart
                 </a>
             </div>
             <div class="Model-overlay">
@@ -20,9 +20,9 @@
                     <p>
                         <a asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
                     </p>
-                    <a href="#" class="btn btn-default add-to-cart">
-                        <i class="fa fa-shopping-cart">
-                        </i>Add to cart
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" 
+                       class="btn btn-default add-to-cart">
+                        <i class="fa fa-shopping-cart"></i>Add to cart
                     </a>
                 </div>
             </div>

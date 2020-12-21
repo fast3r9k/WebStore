@@ -28,10 +28,19 @@ namespace WebStore.Infrastructure.Services.InDb
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
             IQueryable<Product> query = _db.Products;
-            if (Filter?.BranId != null)
-                query = query.Where(product => product.BrandId == Filter.BranId);
-            if (Filter?.SeconId != null)
-                query = query.Where(product => product.SectionId == Filter.SeconId);
+
+            if (Filter?.Ids?.Length > 0)
+                query = query.Where(product => Filter.Ids.Contains(product.Id));
+            
+            else
+            {
+                if (Filter?.BranId != null)
+                    query = query.Where(product => product.BrandId == Filter.BranId);
+
+                if (Filter?.SeconId != null)
+                    query = query.Where(product => product.SectionId == Filter.SeconId);
+            }
+
             return query;
         }
 
