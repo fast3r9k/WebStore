@@ -16,10 +16,7 @@ namespace WebStore.Controllers
         public HomeController(IConfiguration Configuration) => _Configuration = Configuration;
 
         public IActionResult Index() => View();
-        public IActionResult SecondAction()
-        {
-            return Content("Second action");
-        }
+        public IActionResult SecondAction() => Content("Second action");
 
         public IActionResult Blogs() => View();
         public IActionResult BlogSingle() => View();

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Domain.Entityes.Base.Interfaces;
+﻿using System.Collections.Generic;
+using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.ViewModels
 {
@@ -14,5 +11,6 @@ namespace WebStore.ViewModels
         public int Order { get; set; }
         public List<SectionViewModel> ChildSections { get; set; } = new List<SectionViewModel>(); 
         public  SectionViewModel ParentSection { get; set; }
+        public int ProductCount { get; set; }
     }
 }
