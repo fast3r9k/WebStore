@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebStore.Data;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Base;
 
 namespace WebStore.Infrastructure.Interfaces
 {
@@ -19,5 +20,6 @@ namespace WebStore.Infrastructure.Interfaces
         IEnumerable<Product> GetProducts(ProductFilter Filter = null);
         Product GetProductById(int id);
 
+        void Update<T>(T Entity) where T : class;
     }
 }

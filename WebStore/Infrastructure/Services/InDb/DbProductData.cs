@@ -50,5 +50,12 @@ namespace WebStore.Infrastructure.Services.InDb
            .Include(p => p.Brand)
            .Include(p => p.Section)
            .FirstOrDefault(p => p.Id == id);
+
+        public void Update<T>(T Entity) where T : class
+        {
+            _db.Update(Entity);
+
+            _db.SaveChanges();
+        }
     }
 }

@@ -15,12 +15,10 @@ namespace WebStore.Areas.Admin.Controllers
     public class CatalogController : Controller
     {
         private readonly IProductData _ProductData;
-        private readonly WebStoreDb _db;
 
-        public CatalogController(IProductData ProductData, WebStoreDb db)
+        public CatalogController(IProductData ProductData)
         {
             _ProductData = ProductData;
-            _db = db;
 
         } 
         public IActionResult Index()
@@ -47,10 +45,8 @@ namespace WebStore.Areas.Admin.Controllers
            if (ModelState.IsValid)
            {
 
-
-               _db.Update(product);
-
-               _db.SaveChanges();
+                _ProductData.Update(product);
+               
 
                return RedirectToAction("Index");
            }
