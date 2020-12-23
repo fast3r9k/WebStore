@@ -28,7 +28,9 @@
             <td><img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name" /></td>
             <td>
                 <td>
-                    <a href="#">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@product.Id" class="text-danger">
+                    <i class="glyphicon glyphicon-remove"></i>Remove
+                    </a>
                 </td>
             </td>
         </tr>
