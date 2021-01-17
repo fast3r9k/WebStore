@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities;
-using WebStore.ViewModels;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Infrastructure.Mapping
 {
     public static class ProductMapper
     {
-        public static ProductViewModel ToView(this Product p) => new()
+        public static ProductViewModel ToView(this Product p) => new ProductViewModel()
         {
             Id =p.Id,
             Name = p.Name,
