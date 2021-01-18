@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    
+    <p>Order @ViewBag.OrderId has been generated and will be processed shortly</p>
+    
+    <a asp-controller="Home" asp-action="Index">Main page</a>
+</div>

@@ -28,5 +28,6 @@ namespace WebStore.Infrastructure.Services.InMemory
             }
 
         public Product GetProductById(int id) { throw new NotSupportedException(); }
+        public void Update<T>(T Entity) where T : class { throw new NotImplementedException(); }
     }
 }

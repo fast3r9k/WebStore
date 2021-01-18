@@ -30,6 +30,7 @@ namespace WebStore
             services.AddDbContext<WebStoreDb>(opt => opt.UseSqlServer(_Configuration.GetConnectionString("Default")));
             services.AddTransient<WebStoreDbInitializer>();
             services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, DbOrderService>();
 
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<WebStoreDb>()
@@ -96,6 +97,11 @@ namespace WebStore
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
