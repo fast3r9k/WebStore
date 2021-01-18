@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
 using WebStore.Interfaces.TestApi;
 
@@ -11,7 +12,7 @@ namespace WebStore.Clients.Values
 {
     public class ValuesClient : BaseClient, IValuesService
     {
-        public ValuesClient(HttpClient Client, string ServiceAddress) : base(Client, "api/values") { }
+        public ValuesClient(IConfiguration Configuration) : base(Configuration, "api/values") { }
 
         public IEnumerable<string> Get()
         {

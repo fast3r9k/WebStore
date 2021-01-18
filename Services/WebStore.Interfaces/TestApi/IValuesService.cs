@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebStore.Interfaces.TestApi
 {
-    public  interface IValuesService
+    public interface IValuesService
     {
         IEnumerable<string> Get();
 
