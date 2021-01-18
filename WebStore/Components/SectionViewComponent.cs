@@ -39,7 +39,7 @@ namespace WebStore.Components
                             Name = child_section.Name,
                             Order = child_section.Order,
                             ParentSection = parent_section,
-                            ProductCount = child_section.Products.Count()
+                            ProductCount = child_section.Products.Count(),
                         });
 
                 parent_section.ChildSections.Sort((a,b) => Comparer<int>.Default.Compare(a.Order,b.Order));
