@@ -7,6 +7,9 @@ namespace WebStore.Domain
     public  class ProductFilter
     {
         public  int? SeconId { get; set; }
+
         public  int? BranId { get; set; }
+
+        public  int[] Ids { get; set; }
     }
 }

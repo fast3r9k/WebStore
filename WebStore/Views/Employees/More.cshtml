@@ -1,4 +1,5 @@
-﻿@model WebStore.Models.Employee
+﻿@using WebStore.Domain.Entities.Identity
+@model WebStore.Models.Employee
 
 <div class="container">
     <h3>Employee</h3>
@@ -21,7 +22,10 @@
     </dl>
     
     <hr/>
-    
     <a asp-controller="Employees" asp-action="Index" class="btn btn-info">Return to list</a> 
-    <a asp-controller="Employees" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Remove</a>
+    @if (User.IsInRole(Role.Admin))
+    {
+        <a asp-controller="Employees" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Remove</a>
+    }
+    
 </div>

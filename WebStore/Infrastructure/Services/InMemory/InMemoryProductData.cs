@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebStore.Data;
 using WebStore.Domain;
@@ -7,11 +8,15 @@ using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services.InMemory
 {
+    [Obsolete ("Use DbProductData.cs", true)]
     public class InMemoryProductData : IProductData
     {
         public IEnumerable<Section> GetSections() => TestData.Sections;
+        public Section GetSectionById(int id) { throw new NotSupportedException(); }
 
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
+        public Brand GetBrandById(int id) { throw new NotSupportedException(); }
+
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
                 var query = TestData.Products;
@@ -21,5 +26,7 @@ namespace WebStore.Infrastructure.Services.InMemory
                     query = query.Where(product => product.BrandId == Filter.BranId);
                 return query;
             }
-        }
+
+        public Product GetProductById(int id) { throw new NotSupportedException(); }
+    }
 }
