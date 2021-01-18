@@ -14,7 +14,7 @@
                     <form asp-action="Login" asp-antiforgery="true" >
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         
-                        @Html.HiddenFor(e => e.ReturnUrl);
+                        @Html.HiddenFor(e => e.ReturnUrl)
                         <input asp-for="UserName" placeholder="Username"/>
                         <span asp-validation-for="UserName" class="text-danger"></span>
                         <input asp-for="Password" placeholder="Password"/>
