@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Data;
 using WebStore.Services.Products.InCookies;
@@ -33,6 +34,11 @@ namespace WebStore.ServiceHosting
             services.AddDbContext<WebStoreDb>(
                 opt => opt.UseSqlServer(Configuration["Default"]));
             services.AddTransient<WebStoreDbInitializer>();
+
+            services.AddIdentity<User, Role>()
+               .AddEntityFrameworkStores<WebStoreDb>()
+               .AddDefaultTokenProviders();
+
             services.Configure<IdentityOptions>(
                 opt =>
                 {
