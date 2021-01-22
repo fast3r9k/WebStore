@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain;
+using WebStore.Domain.DTO.Products;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Services;
 
@@ -19,22 +20,22 @@ namespace WebStore.ServiceHosting.Controllers
         public ProductsAPIController(IProductData ProductData) => _ProductData = ProductData;
 
         [HttpGet("sections")]
-        public IEnumerable<Section> GetSections() => _ProductData.GetSections();
+        public IEnumerable<SectionDTO> GetSections() => _ProductData.GetSections();
 
         [HttpGet("sections/{id}")]
-        public Section GetSectionById(int id) => _ProductData.GetSectionById(id);
+        public SectionDTO GetSectionById(int id) => _ProductData.GetSectionById(id);
 
         [HttpGet("brands")]
-        public IEnumerable<Brand> GetBrands() => _ProductData.GetBrands();
+        public IEnumerable<BrandDTO> GetBrands() => _ProductData.GetBrands();
 
         [HttpGet("brands/{id}")]
-        public Brand GetBrandById(int id) => _ProductData.GetBrandById(id);
+        public BrandDTO GetBrandById(int id) => _ProductData.GetBrandById(id);
 
         [HttpPost]
-        public IEnumerable<Product> GetProducts([FromBody ]ProductFilter Filter = null) => _ProductData.GetProducts(Filter);
+        public IEnumerable<ProductDTO> GetProducts([FromBody ]ProductFilter Filter = null) => _ProductData.GetProducts(Filter);
 
         [HttpGet("{id}")]
-        public Product GetProductById(int id) => _ProductData.GetProductById(id);
+        public ProductDTO GetProductById(int id) => _ProductData.GetProductById(id);
 
         [HttpPut]
         public void Update<T>(T Entity) where T : class => _ProductData.Update(Entity);

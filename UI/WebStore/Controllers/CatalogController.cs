@@ -30,7 +30,7 @@ namespace WebStore.Controllers
                 SectionId = SectionId,
                 BrandId = BrandId,
                 Products = products
-                   .OrderBy(p =>p.Order).ToView()
+                   .OrderBy(p =>p.Order).FromDTO().ToView()
             });
         }
 
@@ -41,7 +41,7 @@ namespace WebStore.Controllers
             if (product is null)
                 RedirectToAction("Error404", "Home");
 
-            return View(product.ToView());  
+            return View(product.FromDTO().ToView());  
         }
     }
 }
