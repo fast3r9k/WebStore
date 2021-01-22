@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Components
 {
@@ -23,7 +24,7 @@ namespace WebStore.Components
                     {
                         Id = brand.Id,
                         Name = brand.Name,
-                        ProductCount = brand.Products.Count()
+                        ProductCount = brand.FromDTO().Products.Count()
                     });
     }
 }

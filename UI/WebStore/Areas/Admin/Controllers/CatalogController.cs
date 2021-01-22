@@ -9,6 +9,7 @@ using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Areas.Admin.Controllers
 {
@@ -27,7 +28,7 @@ namespace WebStore.Areas.Admin.Controllers
         public IActionResult Index()
         {
 
-            return View(_ProductData.GetProducts());
+            return View(_ProductData.GetProducts().FromDTO());
         }
 
         #region Edit
@@ -37,7 +38,7 @@ namespace WebStore.Areas.Admin.Controllers
         {
             var product = _ProductData.GetProductById(id);
             if (product is null) return NotFound();
-            return View(product);
+            return View(product.FromDTO());
         }
 
         [Authorize(Roles = Role.Admin)]
@@ -69,7 +70,7 @@ namespace WebStore.Areas.Admin.Controllers
 
             if (product is null) return NotFound();
 
-            return View(product);
+            return View(product.FromDTO());
         }
 
         [Authorize(Roles = Role.Admin)]
