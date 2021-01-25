@@ -17,7 +17,7 @@ namespace WebStore.Clients.Products
     {
         private readonly IProductData _ProductData;
 
-        public ProductClients(IConfiguration Configuration, string ServiceAddress) : base(Configuration, WebApi.Products)
+        public ProductClients(IConfiguration Configuration) : base(Configuration, WebApi.Products)
         {
         }
 
