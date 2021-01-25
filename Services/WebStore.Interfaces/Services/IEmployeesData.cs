@@ -15,7 +15,6 @@ namespace WebStore.Interfaces.Services
 
         bool Delete(int id);
 
-        void SaveChanges(); 
 
     }
 }

@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore.Clients.Employees;
+using WebStore.Clients.Orders;
+using WebStore.Clients.Products;
 using WebStore.Clients.Values;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
@@ -29,8 +32,10 @@ namespace WebStore
         {
             services.AddDbContext<WebStoreDb>(opt => opt.UseSqlServer(_Configuration.GetConnectionString("Default")));
             services.AddTransient<WebStoreDbInitializer>();
+
             services.AddScoped<ICartService, InCookiesCartService>();
-            services.AddScoped<IOrderService, DbOrderService>();
+            //services.AddScoped<IOrderService, DbOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
 
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<WebStoreDb>()
@@ -69,8 +74,9 @@ namespace WebStore
                     opt.SlidingExpiration = true;
                 });
 
-            services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
-            services.AddTransient<IProductData, DbProductData>();
+            services.AddTransient<IEmployeesData, EmployeesClient>();
+            //services.AddTransient<IProductData, DbProductData>();
+            services.AddTransient<IProductData, ProductClients>();
             services.AddScoped<IValuesService, ValuesClient>();
 
             services
