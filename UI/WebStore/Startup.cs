@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Clients.Employees;
+using WebStore.Clients.Orders;
 using WebStore.Clients.Products;
 using WebStore.Clients.Values;
 using WebStore.DAL.Context;
@@ -33,7 +34,8 @@ namespace WebStore
             services.AddTransient<WebStoreDbInitializer>();
 
             services.AddScoped<ICartService, InCookiesCartService>();
-            services.AddScoped<IOrderService, DbOrderService>();
+            //services.AddScoped<IOrderService, DbOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
 
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<WebStoreDb>()
