@@ -6,13 +6,14 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
+using WebStore.Interfaces;
 using WebStore.Interfaces.TestApi;
 
 namespace WebStore.Clients.Values
 {
     public class ValuesClient : BaseClient, IValuesService
     {
-        public ValuesClient(IConfiguration Configuration) : base(Configuration, "api/values") { }
+        public ValuesClient(IConfiguration Configuration) : base(Configuration, WebApi.Values) { }
 
         public IEnumerable<string> Get()
         {
