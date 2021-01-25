@@ -16,6 +16,6 @@ namespace WebStore.Interfaces.Services
         IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null);
         ProductDTO GetProductById(int id);
 
-        void Update<T>(T Entлity) where T : class;
+        void Update<T>(T Entity) where T : class;
     } 
 }
