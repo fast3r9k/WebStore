@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
+using WebStore.Domain.DTO.Orders;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Services.Products.InDb
 {
@@ -23,18 +25,20 @@ namespace WebStore.Services.Products.InDb
             _UserManager = UserManager;
         }
 
-        public async Task<IEnumerable<Order>> GetUsersOrders(string UserName) => await _db.Orders
+        public async Task<IEnumerable<OrderDTO>> GetUsersOrders(string UserName) => (await _db.Orders
                .Include(order => order.User)
                .Include(order => order.Items)
                .Where(order => order.User.UserName == UserName)
-               .ToArrayAsync();
+               .ToArrayAsync())
+               .Select(o => o.ToDTO());
 
-        public async Task<Order> GetOrderById(int id) => await _db.Orders
+        public async Task<OrderDTO> GetOrderById(int id) => (await _db.Orders
            .Include(order => order.User)
            .Include(order => order.Items)
-           .FirstOrDefaultAsync(order => order.Id == id);
+           .FirstOrDefaultAsync(order => order.Id == id))
+           .ToDTO(); 
 
-        public async Task<Order> CreateOrder(string UserName, CartViewModel Cart, OrderViewModel OrderModel)
+        public async Task<OrderDTO> CreateOrder(string UserName, CreateOrderModel OrderModel)
         {
             var user = await _UserManager.FindByNameAsync(UserName);
             if (user is null)
@@ -43,16 +47,16 @@ namespace WebStore.Services.Products.InDb
 
             var order = new Order
             {
-                Name = OrderModel.Name,
-                Address = OrderModel.Address,
-                Phone = OrderModel.Phone,
+                Name = OrderModel.Order.Name,
+                Address = OrderModel.Order.Address,
+                Phone = OrderModel.Order.Phone,
                 User = user,
                 Date = DateTime.Now
             };
 
-            foreach (var (productModel, quantity) in Cart.Items)
+            foreach (var (id,_,quantity) in OrderModel.Items)
             {
-                var product = await _db.Products.FindAsync(productModel.Id);
+                var product = await _db.Products.FindAsync(id);
                 if(product is null)
                     continue;
                 var orderItem = new OrderItem
@@ -72,7 +76,7 @@ namespace WebStore.Services.Products.InDb
 
             await transaction.CommitAsync();
 
-            return order;
+            return order.ToDTO();
 
 
         }
