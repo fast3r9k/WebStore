@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
 using WebStore.Domain;
+using WebStore.Domain.DTO.Products;
 using WebStore.Interfaces;
 using WebStore.Interfaces.Services;
 
@@ -29,11 +30,11 @@ namespace WebStore.Clients.Products
         public IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null) => 
             Post(Address, Filter ?? new ProductFilter())
            .Content
-           .ReadAsAsync<IEnumerable<ProductDto>>()
+           .ReadAsAsync<IEnumerable<ProductDTO>>()
            .Result;
 
 
-        public ProductDTO GetProductById(int id)=> Get<ProductDTO>($"{Address}/{id}")
+        public ProductDTO GetProductById(int id) => Get<ProductDTO>($"{Address}/{id}");
 
         public void Update<T>(T Entity) where T : class { throw new NotImplementedException(); }
     }
