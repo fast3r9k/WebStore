@@ -15,6 +15,8 @@ namespace WebStore.Clients.Products
 {
     public class ProductClients : BaseClient, IProductData
     {
+        private readonly IProductData _ProductData;
+
         public ProductClients(IConfiguration Configuration, string ServiceAddress) : base(Configuration, WebApi.Products)
         {
         }
@@ -36,6 +38,6 @@ namespace WebStore.Clients.Products
 
         public ProductDTO GetProductById(int id) => Get<ProductDTO>($"{Address}/{id}");
 
-        public void Update<T>(T Entity) where T : class { throw new NotImplementedException(); }
+        public void Update<T>(T Entity) where T : class => _ProductData.Update(Entity);
     }
 }
