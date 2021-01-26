@@ -12,7 +12,12 @@ namespace WebStore.Interfaces
         public const string Products = "api/products";
         public const string Values = "api/values";
         public const string Orders = "api/orders";
-        
+
+        public static class Identity
+        {
+            public const string User = "api/users";
+            public const string Role = "api/roles";
+        }
         
     }
 }
