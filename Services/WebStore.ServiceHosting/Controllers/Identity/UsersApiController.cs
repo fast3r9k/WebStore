@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -113,5 +114,37 @@ namespace WebStore.ServiceHosting.Controllers.Identity
         public async Task<bool> HasPasswordAsync([FromBody] User user) => await _UserStore.HasPasswordAsync(user);
 
         #endregion
+        #region Claims
+
+        [HttpPost("GetClaims")]
+        public async Task<IList<Claim>> GetClaimsAsync([FromBody] User user) => await _UserStore.GetClaimsAsync(user);
+
+        [HttpPost("AddClaims")]
+        public async Task AddClaimsAsync([FromBody] AddClaimDTO ClaimInfo, [FromServices] WebStoreDb db)
+        {
+            await _UserStore.AddClaimsAsync(ClaimInfo.User, ClaimInfo.Claims);
+            await db.SaveChangesAsync();
+        }
+
+        [HttpPost("ReplaceClaim")]
+        public async Task ReplaceClaimAsync([FromBody] ReplaceClaimDTO ClaimInfo, [FromServices] WebStoreDb db)
+        {
+            await _UserStore.ReplaceClaimAsync(ClaimInfo.User, ClaimInfo.Claim, ClaimInfo.NewClaim);
+            await db.SaveChangesAsync();
+        }
+
+        [HttpPost("RemoveClaim")]
+        public async Task RemoveClaimsAsync([FromBody] RemoveClaimDTO ClaimInfo, [FromServices] WebStoreDb db)
+        {
+            await _UserStore.RemoveClaimsAsync(ClaimInfo.User, ClaimInfo.Claims);
+            await db.SaveChangesAsync();
+        }
+
+        [HttpPost("GetUsersForClaim")]
+        public async Task<IList<User>> GetUsersForClaimAsync([FromBody] Claim claim) =>
+            await _UserStore.GetUsersForClaimAsync(claim);
+
+        #endregion
+
     }
 }
