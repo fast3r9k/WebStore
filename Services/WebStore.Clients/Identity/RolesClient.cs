@@ -6,10 +6,11 @@ using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces;
+using WebStore.Interfaces.Identity;
 
 namespace WebStore.Clients.Identity
 {
-    public class RolesClient : BaseClient
+    public class RolesClient : BaseClient, IRolesClient
     {
         public RolesClient(IConfiguration Configuration) : base(Configuration,WebApi.Identity.Role)
         {
