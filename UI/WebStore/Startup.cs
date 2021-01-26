@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Clients.Employees;
+using WebStore.Clients.Identity;
 using WebStore.Clients.Orders;
 using WebStore.Clients.Products;
 using WebStore.Clients.Values;
@@ -24,21 +25,14 @@ namespace WebStore
 {
     public class Startup
     {
-        private readonly IConfiguration _Configuration;
-
-        public Startup(IConfiguration Configuration) => _Configuration = Configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WebStoreDb>(opt => opt.UseSqlServer(_Configuration.GetConnectionString("Default")));
-            services.AddTransient<WebStoreDbInitializer>();
-
             services.AddScoped<ICartService, InCookiesCartService>();
-            //services.AddScoped<IOrderService, DbOrderService>();
             services.AddScoped<IOrderService, OrdersClient>();
 
             services.AddIdentity<User, Role>()
-               .AddEntityFrameworkStores<WebStoreDb>()
+               .AddIdentityWebStoreApiClients()
                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(
@@ -75,7 +69,6 @@ namespace WebStore
                 });
 
             services.AddTransient<IEmployeesData, EmployeesClient>();
-            //services.AddTransient<IProductData, DbProductData>();
             services.AddTransient<IProductData, ProductClients>();
             services.AddScoped<IValuesService, ValuesClient>();
 
@@ -84,9 +77,9 @@ namespace WebStore
                .AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDbInitializer db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            db.Initialize();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
