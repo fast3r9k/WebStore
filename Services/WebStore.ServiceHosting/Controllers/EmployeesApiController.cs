@@ -70,7 +70,8 @@ namespace WebStore.ServiceHosting.Controllers
             _EmployeesData.Update(employee);
         }
 
-
+        /// <summary>Delete employee by id</summary>
+        /// <param name="id">Employee id</param>
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {

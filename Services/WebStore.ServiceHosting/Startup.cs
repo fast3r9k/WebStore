@@ -1,9 +1,11 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -67,7 +69,18 @@ namespace WebStore.ServiceHosting
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                const string webstoreApiXML = "WebStore.ServiceHosting.xml";
+                const string webstoreDomainXML = "WebStore.Domain.xml";
+                const string debugPath = "bin/Debug/net5.0";
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebStore.ServiceHosting", Version = "v1" });
+
+                c.IncludeXmlComments(webstoreApiXML);
+
+                if (File.Exists(webstoreDomainXML))
+                    c.IncludeXmlComments(webstoreDomainXML);
+                else if(File.Exists(Path.Combine(debugPath,webstoreDomainXML)))
+                    c.IncludeXmlComments(Path.Combine(debugPath, webstoreDomainXML));
+                    
             });
         }
 
@@ -79,6 +92,7 @@ namespace WebStore.ServiceHosting
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebStore.ServiceHosting v1"));
+                
             }
 
             app.UseRouting();
