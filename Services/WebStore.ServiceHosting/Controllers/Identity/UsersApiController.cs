@@ -34,7 +34,7 @@ namespace WebStore.ServiceHosting.Controllers.Identity
         [HttpPost("UserName")]
         public async Task<string> GetUserNameAsync([FromBody] User user) => await _UserStore.GetUserNameAsync(user);
 
-        [HttpPost("userName/{name}")]
+        [HttpPost("UserName/{name}")]
         public async Task<string> SetUserNameAsync([FromBody] User user, string name)
         {
             await _UserStore.SetUserNameAsync(user, name);
@@ -93,6 +93,10 @@ namespace WebStore.ServiceHosting.Controllers.Identity
             await _UserStore.RemoveFromRoleAsync(user, role);
             await db.SaveChangesAsync();
         }
+
+        [HttpPost("Roles")]
+        public async Task<IList<string>> GetRolesAsync([FromBody] User user) => await _UserStore.GetRolesAsync(user);
+
 
         [HttpPost("InRole/{role}")]
         public async Task<bool> IsInRoleAsync([FromBody] User user, string role) => await _UserStore.IsInRoleAsync(user, role);
