@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace WebStore.Clients.Base
 {
-    public abstract class BaseClient
+    public abstract class BaseClient : IDisposable
     {
         protected string Address { get; }
         protected HttpClient Http { get; }
@@ -53,6 +53,18 @@ namespace WebStore.Clients.Base
         {
             var response = await Http.DeleteAsync(url);
             return response;
+        }
+
+        public void Dispose() => Dispose(true);
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (Disposing)
+            {
+                Http.Dispose();
+            }
+
+
         }
     }
 }
