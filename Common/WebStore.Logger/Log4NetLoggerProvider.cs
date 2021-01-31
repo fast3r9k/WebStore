@@ -18,7 +18,7 @@ namespace WebStore.Logger
             {
                 var xml = new XmlDocument();
                 xml.Load(_ConfigurationFile);
-                return new Log4NetLogger(category, xml["log4Net"]);
+                return new Log4NetLogger(category, xml["log4net"]);
             });
     }
 }
