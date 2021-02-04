@@ -72,7 +72,7 @@ namespace WebStore.Tests.Controllers
         }
 
         [TestMethod]
-        public void Contacts_Returns_View()
+        public void ContactUs_Returns_View()
         {
             //A-A-A = Arrange - Act - Assert
 
@@ -95,5 +95,37 @@ namespace WebStore.Tests.Controllers
             var result = controller.Throw(expected_exception_message);
 
         }
+
+        [TestMethod]
+        public void Error404_Returns_View()
+        {
+            //A-A-A = Arrange - Act - Assert
+
+            var controller = new HomeController();
+
+            var result = controller.Error404();
+
+            //Assert.IsInstanceOfType(result,typeof(ViewResult)); // MSTest
+
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [TestMethod]
+        public void ErrorStatus_404_RedirectTo_Error404()
+        {
+            var controller = new HomeController();
+
+            const string  error_status_code = "404";
+
+            const string expected_action_name = nameof(HomeController.Error404);
+
+            var result = controller.ErrorStatus(error_status_code);
+
+            var redirect_to_action = Assert.IsType<RedirectToActionResult>(result);
+
+            Assert.Equal(expected_action_name, redirect_to_action.ActionName);
+            Assert.Null(redirect_to_action.ControllerName) ;
+        }
+
     }
 }
