@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebStore.Domain.Models;
+using WebStore.Domain.Entities;
 using WebStore.Interfaces;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.ServiceHosting.Controllers
 {
     //[Route("api/[controller]")]
+
+    /// <summary> API employees control </summary>
     [Route(WebApi.Employees)]
 
     [ApiController]
@@ -26,12 +28,18 @@ namespace WebStore.ServiceHosting.Controllers
             _Logger = Logger;
         }
 
+        /// <summary> Get all employees </summary>
+        /// <returns>List of employees</returns>
         [HttpGet]
         public IEnumerable<Employee> Get() => _EmployeesData.Get();
 
+        /// <summary> Get employee by id</summary>
+        /// <param name="id">employee id</param>
         [HttpGet("{id}")]
         public Employee Get(int id) => _EmployeesData.Get(id);
 
+        /// <summary>Add new employee </summary>
+        /// <returns>New employee's id</returns>
         [HttpPost]
         public int Add(Employee employee)
         {
@@ -49,6 +57,8 @@ namespace WebStore.ServiceHosting.Controllers
             return id;
         }
 
+        /// <summary>Editing employee </summary>
+        /// <param name="employee">Editing information</param>
         [HttpPut]
         public void Update(Employee employee)
         {
@@ -60,7 +70,8 @@ namespace WebStore.ServiceHosting.Controllers
             _EmployeesData.Update(employee);
         }
 
-
+        /// <summary>Delete employee by id</summary>
+        /// <param name="id">Employee id</param>
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
