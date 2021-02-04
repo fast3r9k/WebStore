@@ -9,20 +9,12 @@ namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _Configuration;
-       
-        public HomeController(IConfiguration Configuration) => _Configuration = Configuration;
-
         public IActionResult Index() => View();
+        public IActionResult Throw(string id) => throw new ApplicationException(id);
         public IActionResult SecondAction() => Content("Second action");
-
         public IActionResult Blogs() => View();
         public IActionResult BlogSingle() => View();
-        public IActionResult Cart() => View();
-        public IActionResult CheckOut() => View();
         public IActionResult ContactUs() => View();
-        public IActionResult Login() => View();
-        public IActionResult ProductDetails() => View();
         public IActionResult Shop() => View();
         public IActionResult Error404() => View();
     }
