@@ -20,7 +20,8 @@
     <li><a asp-controller="Home" asp-action="Error404">404</a></li>
     <li><a asp-controller="Home" asp-action="ContactUs">Contact</a></li>    
     <li><a asp-controller="Employees" asp-action="Index" class="@IsActive("Employees")">Employees</a></li>    
-    <li><a asp-controller="WebApi" asp-action="Index">WEbApi</a></li>    
+    <li><a is-active-route asp-controller="WebApi" asp-action="Index">WEbApi</a></li>    
+
 </ul>
 
 @functions
