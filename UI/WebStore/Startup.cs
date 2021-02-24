@@ -20,6 +20,7 @@ using WebStore.Interfaces.Services;
 using WebStore.Interfaces.TestApi;
 using WebStore.Logger;
 using WebStore.Services.Data;
+using WebStore.Services.Products;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InDb;
 using WebStore.Services.Products.InMemory;
@@ -31,7 +32,8 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartStore, InCookiesCartStore>();
             services.AddScoped<IOrderService, OrdersClient>();
 
             services.AddIdentity<User, Role>()
