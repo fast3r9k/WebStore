@@ -28,7 +28,7 @@ namespace WebStore.Areas.Admin.Controllers
         public IActionResult Index()
         {
 
-            return View(_ProductData.GetProducts().FromDTO());
+            return View(_ProductData.GetProducts().Products.FromDTO());
         }
 
         #region Edit

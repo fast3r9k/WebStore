@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using WebStore.Domain;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
@@ -13,24 +12,41 @@ namespace WebStore.Controllers
     public class CatalogController : Controller
     {
         private readonly IProductData _ProductData;
+        private readonly IConfiguration _Configuration;
 
-        public CatalogController(IProductData ProductData) => _ProductData = ProductData;
-        public IActionResult Shop(int? BrandId, int? SectionId)
+        public CatalogController(IProductData ProductData, IConfiguration Configuration)
         {
+            _ProductData = ProductData;
+            _Configuration = Configuration;
+        }
+
+        public IActionResult Shop(int? BrandId, int? SectionId, int Page = 1, int? PageSize = null)
+        {
+            var page_size = PageSize ?? (int.TryParse(_Configuration["CatalogPageSize"], out var value) ? value : null);
+
             var filter = new ProductFilter
             {
                 BranId = BrandId,
-                SeconId = SectionId
+                SeconId = SectionId,
+                Page = Page,
+                PageSize = page_size,
+
             };
 
-            var products = _ProductData.GetProducts(filter);
+            var (products, total_count) = _ProductData.GetProducts(filter); 
 
             return View(new CatalogViewModel
             {
                 SectionId = SectionId,
                 BrandId = BrandId,
                 Products = products
-                   .OrderBy(p =>p.Order).FromDTO().ToView()
+                   .OrderBy(p =>p.Order).FromDTO().ToView(),
+                PageViewModel = new PageViewModel
+                {
+                    PageNumber = Page,
+                    PageSize = page_size ?? 0,
+                    TotalItems = total_count,
+                },
             });
         }
 

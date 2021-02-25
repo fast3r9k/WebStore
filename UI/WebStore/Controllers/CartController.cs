@@ -76,5 +76,33 @@ namespace WebStore.Controllers
             return View();
         }
 
+        #region WebApi
+
+        public IActionResult GetCartView() => ViewComponent("Cart");
+
+        public IActionResult AddToCartAPI(int id)
+        {
+            _CartService.AddToCart(id);
+            return Json(new { id, message = $"Product with id: {id} has been added to cart"});
+        }
+
+        public IActionResult DeleteFromCartAPI(int id)
+        {
+            _CartService.DeleteFromCart(id);
+            return Ok();
+        }
+
+        public IActionResult DecrementFromCartAPI(int id)
+        {
+            _CartService.DecrementFromCart(id);
+            return Ok(new { id, message = $"Product quantity with id: {id} has been reduced by 1" });
+        }
+        public IActionResult ClearAPI()
+        {
+            _CartService.Clear();
+            return Ok();
+        }
+        #endregion
+
     }
 }
