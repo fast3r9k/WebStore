@@ -79,7 +79,7 @@ namespace WebStore.Services.Products
                 Ids = _CartStore.Cart.Items.Select(item => item.ProductId).ToArray()
             });
 
-            var product_view_models = products.FromDTO().ToView();
+            var product_view_models = products.Products.FromDTO().ToView();
 
             return new CartViewModel
             {

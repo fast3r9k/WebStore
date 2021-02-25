@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -12,6 +13,7 @@ using WebStore.Domain.DTO.Products;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
 using Assert=Xunit.Assert;
+using IConfiguration = Castle.Core.Configuration.IConfiguration;
 
 namespace WebStore.Tests.Controllers
 {
@@ -43,7 +45,11 @@ namespace WebStore.Tests.Controllers
                    new SectionDTO(1,$"Section of product {id}", 1, null,1)
                 ));
 
-            var controller = new CatalogController(product_data_mock.Object);
+            var configurationMock = new Mock<Microsoft.Extensions.Configuration.IConfiguration>();
+
+            configurationMock.Setup(configuration => configuration[It.IsAny<string>()]).Returns("3");
+
+            var controller = new CatalogController(product_data_mock.Object, configurationMock.Object);
 
 
             var result = controller.Details(expected_product_id);
@@ -72,11 +78,15 @@ namespace WebStore.Tests.Controllers
 
             var productDataMock = new Mock<IProductData>();
             productDataMock.Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
-               .Returns(products);
+               .Returns(new PageProductsDTO(products, products.Length));
 
-            var controller = new CatalogController(productDataMock.Object);
+            var configurationMock = new Mock<Microsoft.Extensions.Configuration.IConfiguration>();
 
-            var result = controller.Shop(expected_brand_id, expected_section_id);
+            configurationMock.Setup(configuration => configuration[It.IsAny<string>()]).Returns("3");
+
+            var controller = new CatalogController(productDataMock.Object, configurationMock.Object);
+
+            var result = controller.Shop(expected_brand_id, expected_section_id); 
 
             var view_result = Assert.IsType<ViewResult>(result);
 

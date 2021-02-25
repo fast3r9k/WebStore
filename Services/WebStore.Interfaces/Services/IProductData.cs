@@ -13,7 +13,7 @@ namespace WebStore.Interfaces.Services
         IEnumerable<BrandDTO> GetBrands();
         BrandDTO GetBrandById(int id);
 
-        IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null);
+        PageProductsDTO GetProducts(ProductFilter Filter = null);
         ProductDTO GetProductById(int id);
 
         void Update<T>(T Entity) where T : class;

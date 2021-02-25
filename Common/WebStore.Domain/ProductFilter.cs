@@ -11,5 +11,9 @@ namespace WebStore.Domain
         public  int? BranId { get; set; }
 
         public  int[] Ids { get; set; }
+
+        public  int Page { get; set; }
+
+        public  int? PageSize { get; set; }
     }
 }
